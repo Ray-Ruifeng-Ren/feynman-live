@@ -1,0 +1,227 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-chalk: 'Caveat', cursive;
+  --font-serif: 'Source Serif 4', Georgia, serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  background: #0e1013;
+  overflow: hidden;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+}
+
+/* ---- stage ---- */
+.stage-vignette {
+  background:
+    radial-gradient(120% 90% at 50% 30%, rgba(255, 214, 150, 0.1), transparent 55%),
+    radial-gradient(140% 120% at 50% 110%, rgba(0, 0, 0, 0.55), transparent 60%);
+}
+
+.board-texture {
+  background:
+    radial-gradient(60% 50% at 30% 25%, rgba(255, 255, 255, 0.045), transparent 70%),
+    radial-gradient(50% 45% at 75% 70%, rgba(255, 255, 255, 0.035), transparent 70%),
+    linear-gradient(160deg, #24352f 0%, #1b2a25 45%, #17251f 100%);
+}
+
+/* ---- character motion ---- */
+@keyframes breathe {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(3px) rotate(0.4deg);
+  }
+}
+@keyframes headBob {
+  0%,
+  100% {
+    transform: rotate(-0.7deg);
+  }
+  50% {
+    transform: rotate(0.8deg);
+  }
+}
+@keyframes headBobTalk {
+  0% {
+    transform: rotate(-1.1deg) translateY(0);
+  }
+  30% {
+    transform: rotate(0.9deg) translateY(-2px);
+  }
+  60% {
+    transform: rotate(-0.6deg) translateY(1px);
+  }
+  100% {
+    transform: rotate(1.2deg) translateY(-1px);
+  }
+}
+@keyframes armGesture {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-7deg);
+  }
+  55% {
+    transform: rotate(4deg);
+  }
+  80% {
+    transform: rotate(-3deg);
+  }
+}
+@keyframes armIdle {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-2deg);
+  }
+}
+
+.anim-breathe {
+  animation: breathe 4.2s ease-in-out infinite;
+  transform-origin: 50% 90%;
+}
+.anim-head {
+  animation: headBob 5.5s ease-in-out infinite;
+  transform-origin: 300px 560px;
+}
+.anim-head-talk {
+  animation: headBobTalk 1.6s ease-in-out infinite alternate;
+  transform-origin: 300px 560px;
+}
+.anim-arm-right {
+  animation: armIdle 4.5s ease-in-out infinite;
+  transform-origin: 262px 444px;
+}
+.anim-arm-right-talk {
+  animation: armGesture 2.1s ease-in-out infinite;
+  transform-origin: 262px 444px;
+}
+.anim-arm-left {
+  animation: armIdle 5.2s ease-in-out infinite reverse;
+  transform-origin: 160px 456px;
+}
+
+/* ---- photo avatar motion ---- */
+@keyframes photoIdle {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-0.25deg) scale(1);
+  }
+  50% {
+    transform: translateY(4px) rotate(0.3deg) scale(1.006);
+  }
+}
+@keyframes photoTalk {
+  0% {
+    transform: translateY(0) rotate(-0.5deg) scale(1.004);
+  }
+  30% {
+    transform: translateY(-3px) rotate(0.4deg) scale(1.008);
+  }
+  65% {
+    transform: translateY(2px) rotate(-0.25deg) scale(1.004);
+  }
+  100% {
+    transform: translateY(-2px) rotate(0.55deg) scale(1.009);
+  }
+}
+.photo-idle {
+  animation: photoIdle 5.2s ease-in-out infinite;
+  transform-origin: 50% 78%;
+}
+.photo-talk {
+  animation: photoTalk 1.9s ease-in-out infinite alternate;
+  transform-origin: 50% 78%;
+}
+
+/* ---- chalk writing ---- */
+@keyframes chalkIn {
+  from {
+    opacity: 0;
+    transform: translateY(8px) rotate(-1deg);
+    filter: blur(3px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) rotate(0deg);
+    filter: blur(0);
+  }
+}
+.chalk-in {
+  animation: chalkIn 0.7s ease-out both;
+}
+
+@keyframes captionIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.caption-in {
+  animation: captionIn 0.35s ease-out both;
+}
+
+@keyframes dotPulse {
+  0%,
+  80%,
+  100% {
+    opacity: 0.25;
+    transform: scale(0.8);
+  }
+  40% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.thinking-dot {
+  animation: dotPulse 1.2s ease-in-out infinite;
+}
+.thinking-dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+.thinking-dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes speakBar {
+  0%,
+  100% {
+    height: 25%;
+  }
+  50% {
+    height: 100%;
+  }
+}
+.speak-bar {
+  animation: speakBar 0.9s ease-in-out infinite;
+  min-height: 3px;
+}
+
+@keyframes micPulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(248, 113, 113, 0.5);
+  }
+  50% {
+    box-shadow: 0 0 0 12px rgba(248, 113, 113, 0);
+  }
+}
+.mic-live {
+  animation: micPulse 1.4s ease-out infinite;
+}
